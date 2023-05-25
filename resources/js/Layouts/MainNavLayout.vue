@@ -97,7 +97,7 @@
                     v-if="showMenu"
                     class="absolute bg-white shadow-xl top-10 right-0 w-[330px] rounded-lg p-1 border mt-1"
                 >
-                    <Link :href="route('user.show', { id: pet.id })" @click="showMenu = !showMenu">
+                    <Link >
                         <div class="flex items-center gap-3 hover:bg-gray-200 p-2 rounded-lg">
                             <img class="rounded-full ml-1 min-w-[35px] max-h-[35px] cursor-pointer" :src="pet.image">
                             <span>{{ pet.name }}</span>

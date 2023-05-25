@@ -1,5 +1,11 @@
+
 <template>
-  <div>
+  <div class="max-w-[1100px] pt-[56px] mx-auto pb-1 mt-0">
+    <img class="rounded-b-xl ml-[469px]" src="/images/icons/Petmetlogo.jpg">
+  </div>
+
+  
+  <div class="h-[100vh] flex flex-col items-center pt-[11px] bg-blue-100 pb-[120px]">
     <div v-if="successMessage" class="success-message">
       {{ successMessage }}
     </div>
@@ -7,30 +13,31 @@
     <!-- Conditionally render the form based on the 'showForm' data property -->
     <form @submit.prevent="submitForm">
       <!-- Form fields and inputs -->
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pet-name">
+      <div class="">
+        <div class="">
+          <label class="">
             Pet Name
           </label>
           <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="pet-name" v-model="formData.name" type="text" placeholder="Tom">
-        </div>
+          
+           </div>
       </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <div class="">
+        <div class="">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pet-category">
             Category
           </label>
           <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="pet-category" v-model="formData.category" type="text" placeholder="Cat">
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      
+        <div class="">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="pet-age">
             Age
           </label>
           <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="pet-age" v-model="formData.age" type="text" placeholder="4 years">
         </div>
-      </div>
+      
       <!-- Other form fields -->
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
         Save
@@ -40,6 +47,7 @@
 </template>
 
 <script>
+import UserNavLayout from "@/Layouts/UserNavLayout.vue";
 import { ref } from 'vue';
 import { post, Inertia } from '@inertiajs/inertia';
 import { Link, router, usePage} from '@inertiajs/vue3';

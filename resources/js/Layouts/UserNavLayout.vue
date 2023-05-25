@@ -33,22 +33,27 @@
     
     <div
         id="MainNav"
-        class="fixed z-50 w-full flex items-center justify-between h-[56px] bg-white shadow-xl border-b"
+        class="fixed bg-blue-500 w-full flex items-center justify-between h-[76px] shadow-3xl border-b"
     >
-        <div id="NavLeft" class="flex items-center justify-start w-[260px]">
+        <div id="NavLeft" class="flex items-center  justify-start w-[260px]">
             <Link :href="route('posts.index')" class="pl-3 min-w-[55px]">
-                <img class="w-[55px]" src="/images/icons/petmetlogo.jpg">
+                <img class="w-[55px] rounded-full" src="/images/icons/petmetlogo.jpg">
             </Link>
-            <div class="flex items-center justify-center bg-[#EFF2F5] p-1 rounded-full h-[40px] ml-2">
-                <Magnify class="p-1" :size="22" fillColor="#64676B"/>
+          
+        </div>
+
+      
+        <div class="flex   items-center justify-center  bg-transparent border-2 p-1 rounded-full h-[40px] w-[300px]  ml-2">
+                <Magnify class="p-1" :size="22" fillColor="white"/>
                 <input
                     class="
+                    bg-transparent
                         lg:block
                         hidden
                         border-none
                         p-0
-                        bg-[#EFF2F5]
-                        placeholder-[#64676B]
+                        text-white
+                        placeholder-white
                         ring-0
                         focus:ring-0
                     "
@@ -56,25 +61,6 @@
                     type="text"
                 >
             </div>
-        </div>
-
-        <div id="NavCenter" class="hidden lg:flex items-center ml-5 justify-center w-8/12 max-w-[600px]">
-            <!-- <Link class="w-full" :href="route('posts.index')">
-                <div
-                    :class="$page.url === '/' ? 'mt-1.5' : '' "
-                    class="flex items-center justify-center h-[48px] p-1 hover:bg-[#F2F2F2] w-full rounded-lg cursor-pointer"
-                >
-                    <div>
-                        <Home v-if="$page.url === '/'" class="mx-auto" :size="27" fillColor="#1A73E3"/>
-                        <HomeOutline v-else class="mx-auto" :size="32" fillColor="#64676B"/>
-                    </div>
-                </div>
-                <div
-                    v-if="$page.url === '/'"
-                    class="border-b-4 border-b-blue-400 rounded-md"
-                ></div>
-            </Link>-->
-        </div> 
         <div class="flex items-center justify-end w-2/12 mr-4">
             
             <button class="rounded-full bg-[#E3E6EA] p-2 hover:bg-gray-300 mx-1 cursor-pointer">

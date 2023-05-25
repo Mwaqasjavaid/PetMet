@@ -15,7 +15,7 @@ const { pets, user } = toRefs(props);
 
 <template>
     <UserNavLayout>
-        <div class="">
+        <div class="bg-blue-100 pb-[120px]">
             <div v-if="successMessage" class="success-message">
                 {{ successMessage }}
             </div>
@@ -24,24 +24,27 @@ const { pets, user } = toRefs(props);
             <!-- <Link :href="route('addpets', { id: $page.props.auth.user.id })" class="mr-2"> -->
             <!-- ADD PETS -->
             <!-- </Link> -->
-            <div class="flex items-center justify-center">
-                <button
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+
+            <div class="flex justify-center ">
+                <h1
+                    class="mb-2 text-[#] mt-[50px] text-5xl font-bold leading-tight"
                 >
-                    <a href="addpets">ADD PETS</a>
-                </button>
-            </div>
-           <div class="flex justify-items-center">
-            <h1
-                class="mb-2 mt-[50px] text-5xl font-medium leading-tight text-primary "
-            >
-                User PetList
-            </h1>
-            </div>
-            <div
-                class="flex items-center justify-between pb-2"
+                    User PetList
+                </h1>
+
                 
-            >
+            </div>
+
+            <div class="flex justify-center ">
+                <h1
+                    class="mb-2 text-[#] mt-[10px] text-1xl font-bold leading-tight text-blue-500"
+                >
+                    Click on PET to login
+                </h1>
+
+                
+            </div>
+            <div class="flex justify-center pt-6 pb-2">
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div
@@ -52,11 +55,31 @@ const { pets, user } = toRefs(props);
                                     class="min-w-full text-center text-sm font-light"
                                 >
                                     <thead
-                                        class="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900"
+                                        class="border-b flex justify-between font-medium"
                                     >
+                        
                                         <tr>
-                                            <th scope="col" class="px-6 py-4 ">
-                                                PetID
+                                            <th
+                                                scope="col"
+                                                class="rounded-xl px-10 text-[#303234] py-4 text-4xl"
+                                            >
+                                                PET
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                scope="col"
+                                                class="rounded-xl px-10 text-[#303234] py-4 text-4xl"
+                                            >
+                                                CATEGORY
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                scope="col"
+                                                class="rounded-xl px-16 text-[#303234] py-4 text-4xl"
+                                            >
+                                                AGE
                                             </th>
                                         </tr>
                                     </thead>
@@ -64,12 +87,32 @@ const { pets, user } = toRefs(props);
                                         <tr
                                             v-for="pet in pets"
                                             :key="pet.id"
-                                            class="border-b dark:border-neutral-500"
+                                            class="border-b flex justify-between dark:border-neutral-500"
                                         >
                                             <td
-                                                class="whitespace-nowrap px-6 py-4 font-medium  cursor-cell bg-white-600 hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 "
+                                                class="px-6 ml-0 py-4 hover:text-blue-600 hover:underline font-bold text-2xl uppercase ">
+                                             <div class="flex flex-row">
+                                                <div><img class="rounded-full ml-1 min-w-[35px] max-h-[35px] cursor-pointer" :src="pet.image"></div>
+                                                <div> <a :href="`/pet/${pet.id}`"> {{ pet.name }} </a></div>
+                                             </div>
+                                                   
+                                                
+                    
+                       
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 font-bold text-2xl uppercase text-center"
                                             >
-                                               <a :href="`/pet/${pet.id}`">{{ pet.name }}</a> 
+                                                <a :href="`/pet/${pet.id}`">{{
+                                                    pet.category
+                                                }}</a>
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 mr-14 font-bold text-2xl uppercase"
+                                            >
+                                                <a :href="`/pet/${pet.id}`">{{
+                                                    pet.age
+                                                }}</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -78,6 +121,13 @@ const { pets, user } = toRefs(props);
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex items-center pt-5 justify-center">
+                <button
+                    class="bg-blue-500 text-white font-bold py-3 px-10 rounded-full"
+                >
+                    <a href="addpets">ADD PETS</a>
+                </button>
             </div>
         </div>
     </UserNavLayout>
