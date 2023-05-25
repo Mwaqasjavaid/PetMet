@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\PetsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
@@ -8,19 +8,28 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/addpets', function () {
+    return Inertia::render('AddPets');
+})->name('addpets')->middleware('auth');
+
+Route::get('/petprofile', function () {
+    return Inertia::render('PetProfile');
+})->name('petprofile')->middleware('auth');
+
+// Route::get('/', [PetsController::class, 'index'])->name('pets.index');
+
+require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::post('/pets', [PetsController::class, 'store'])->name('pets.store');
+    Route::get('/pet/{id}', [PetsController::class, 'show'])->name('pets.show');
+    Route::get('/', [PetsController::class, 'index'])->name('pets.index');  
+    Route::get('/changepet', [PetsController::class, 'changepet']);
+    Route::post('/pet/{id}/update-image', [PetsController::class, 'updateImage'])->name('pet.updateImage');
+    
+//    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
     Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
 
@@ -36,3 +45,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+

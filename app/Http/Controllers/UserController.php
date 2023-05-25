@@ -22,10 +22,10 @@ class UserController extends Controller
 
     public function show(int $id)
     {
-        $posts = Post::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        // $posts = Post::where('user_id', $id)->orderBy('created_at', 'desc')->get();
         return Inertia::render('User', [
             'user' => User::find($id),
-            'posts' => new AllPostsCollection($posts)
+            // 'posts' => new AllPostsCollection($posts)
         ]);
     }
 

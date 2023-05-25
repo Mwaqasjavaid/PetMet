@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 import { router, usePage } from '@inertiajs/vue3';
 
 import VideoImage from 'vue-material-design-icons/VideoImage.vue'
@@ -26,6 +26,12 @@ const form = reactive({
     image: null,
 })
 let error = ref(null)
+
+const props = defineProps({
+        pet: Object,
+    });
+
+    const { pet } = toRefs(props)
 
 const createPost = () => {
     router.post('/post', form, {
@@ -76,9 +82,11 @@ const clearImage = () => {
 
 
                         <div class="flex items-center">
-                            <img class="rounded-full ml-1 min-w-[45px] max-h-[45px]" :src="user.image">
+                            <img v-if="pet.image" class="rounded-full ml-1 min-w-[45px] max-h-[45px]" :src="pet.image">
+                            <img v-else class="rounded-full ml-1 min-w-[40px] max-h-[40px] cursor-pointer" src="/images/user-placeholder.png">
+                            
                             <div class="ml-4">
-                                <div class="font-extrabold">{{ user.name }}</div>
+                                <div class="font-extrabold">{{ pet.name }}</div>
                                 <div class="flex items-center justify-between w-[100px] bg-gray-200 p-0.5 px-2 rounded-lg">
                                     <Earth :size="18"/>
                                     <span class="font-bold pl-1.5 text-[13px]">Public</span>

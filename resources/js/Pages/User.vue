@@ -9,8 +9,9 @@ import Pen from 'vue-material-design-icons/Pen.vue'
 
 import { useGeneralStore } from '@/stores/general';
 import { storeToRefs } from 'pinia';
+import UserNavLayout from '@/Layouts/UserNavLayout.vue';
 const useGeneral = useGeneralStore()
-const { isCropperModal, isImageDisplay } = storeToRefs(useGeneral)
+const { isUserCropperModal, isImageDisplay } = storeToRefs(useGeneral)
 
 defineProps({ posts: Object, user: Object })
 
@@ -19,7 +20,7 @@ defineProps({ posts: Object, user: Object })
 <template>
     <Head title="Profile" />
 
-    <MainNavLayout>
+    <UserNavLayout>
         <div class="w-full min-h-[100vh] pb-20 bg-[#F1F2F5]">
             <div class="w-full bg-white">
                 <div class="max-w-[1100px] pt-[56px] mx-auto pb-1">
@@ -34,7 +35,7 @@ defineProps({ posts: Object, user: Object })
                                 >
                                 <button
                                     v-if="$page.props.auth.user.id === user.id"
-                                    @click="isCropperModal = true"
+                                    @click="isUserCropperModal = true"
                                     class="absolute right-0 top-[100px] bg-gray-200 hover:bg-gray-300 p-1.5 rounded-full cursor-pointer"
                                 >
                                     <Camera :size="25"/>
@@ -44,37 +45,6 @@ defineProps({ posts: Object, user: Object })
                                 <div class="text-[28px] font-extrabold pt-1">
                                     {{ user.name }}
                                 </div>
-                                <!-- <div class="text-[17px] font-bold text-gray-600 mb-1.5 text-center md:text-left">234 friends</div>
-                                <div class="flex md:justify-start justify-center md:-ml-1">
-                                    <img
-                                        class="rounded-full -ml-1 z-[10] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/141/2000/320"
-                                    >
-                                    <img
-                                        class="rounded-full -ml-3 z-[9] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/142/2000/320"
-                                    >
-                                    <img
-                                        class="rounded-full -ml-3 z-[8] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/143/2000/320"
-                                    >
-                                    <img
-                                        class="rounded-full -ml-3 z-[7] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/144/2000/320"
-                                    >
-                                    <img
-                                        class="rounded-full -ml-3 z-[6] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/145/2000/320"
-                                    >
-                                    <img
-                                        class="rounded-full -ml-3 z-[5] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/146/2000/320"
-                                    >
-                                    <img
-                                        class="rounded-full -ml-3 z-[4] w-[40px] h-[40px] border-white border-2"
-                                        src="https://picsum.photos/id/147/2000/320"
-                                    >
-                                </div> -->
                             </div>
                         </div>
 
@@ -103,7 +73,7 @@ defineProps({ posts: Object, user: Object })
 
                     <div class="flex items-centerw-full border-t h-[50px] py-[4px]">
                         <button class="w-[85px]">
-                            <div
+                            <!-- <div
                                 class="
                                     flex
                                     items-center
@@ -119,24 +89,10 @@ defineProps({ posts: Object, user: Object })
                                 "
                             >
                                 Posts
-                            </div>
+                            </div> -->
                             <div class="border-b-4 border-b-blue-400 rounded-md"></div>
                         </button>
-                        <!-- <button class="flex items-center text-[15px] justify-center h-[48px] p-1 hover:bg-[#F2F2F2] w-[85px] font-bold rounded-lg mx-1 cursor-pointer">
-                            About
-                        </button>
-                        <button class="flex items-center text-[15px] justify-center h-[48px] p-1 hover:bg-[#F2F2F2] w-[85px] font-bold rounded-lg mx-1 cursor-pointer">
-                            Friends
-                        </button>
-                        <button class="flex items-center text-[15px] justify-center h-[48px] p-1 hover:bg-[#F2F2F2] w-[85px] font-bold rounded-lg mx-1 cursor-pointer">
-                            Videos
-                        </button>
-                        <button class="flex items-center text-[15px] justify-center h-[48px] p-1 hover:bg-[#F2F2F2] w-[85px] font-bold rounded-lg mx-1 cursor-pointer">
-                            Photos
-                        </button>
-                        <button class="flex items-center text-[15px] justify-center h-[48px] p-1 hover:bg-[#F2F2F2] w-[85px] font-bold rounded-lg mx-1 cursor-pointer">
-                            Check-ins
-                        </button> -->
+                  
                     </div>
                 </div>
             </div>
@@ -144,30 +100,7 @@ defineProps({ posts: Object, user: Object })
             <div class="flex-cols md:flex w-full max-w-[1100px] justify-between h-[calc(100%-56px)] md:px-0 px-2 mx-auto">
 
                 <div id="LeftSection" class="w-full md:w-5/12 mt-4 mr-4">
-                    <!-- <div class="bg-white p-3 rounded-lg shadow-lg">
-                        <div class="font-extrabold pb-2 text-xl">Intro</div>
-                        <div class="pb-5">
-                            <button class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
-                                Add bio
-                            </button>
-                        </div>
-                        <div class="pb-5">
-                            <button class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
-                                Edit details
-                            </button>
-                        </div>
-                        <div class="pb-5">
-                            <button class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
-                                Add hobbies
-                            </button>
-                        </div>
-                        <div>
-                            <button class="w-full bg-gray-200 hover:bg-gray-300 rounded-lg p-2 font-bold">
-                                Add feature
-                            </button>
-                        </div>
-                    </div> -->
-
+<!-- 
                     <div class="bg-white p-3 mt-4 rounded-lg shadow-lg">
                         <div class="font-extrabold pb-2 text-xl">Photos</div>
                         <div class="flex flex-wrap items-center justify-start w-full">
@@ -184,10 +117,10 @@ defineProps({ posts: Object, user: Object })
                                 >
                             </span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
-                <div id="PostsSection" class="w-full md:w-7/12  overflow-auto">
+                <!-- <div id="PostsSection" class="w-full md:w-7/12  overflow-auto">
 
                     <CreatePostBox
                         v-if="$page.props.auth.user.id === user.id"
@@ -199,9 +132,9 @@ defineProps({ posts: Object, user: Object })
                         <Post :user="post.user" :post="post" :comments="post.comments" />
                     </div>
 
-                </div>
+                </div> -->
 
             </div>
         </div>
-    </MainNavLayout>
+    </UserNavLayout>
 </template>

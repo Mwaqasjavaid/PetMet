@@ -1,18 +1,15 @@
 <script setup>
     import { ref, toRefs } from 'vue';
-    import { router } from '@inertiajs/vue3';
+    import { router, usePage } from '@inertiajs/vue3';
     import { Cropper, CircleStencil } from 'vue-advanced-cropper'
     import Close from 'vue-material-design-icons/Close.vue'
     import Plus from 'vue-material-design-icons/Plus.vue'
     import 'vue-advanced-cropper/dist/style.css';
 
     
-const props = defineProps({
-    pet: Object,
-});
+    const user = usePage().props.auth.user
 
-const { pet } = toRefs(props)
-console.log('groped image', props.pet)
+console.log('groped image',user)
 
     const emit = defineEmits(['showModal'])
 
@@ -42,7 +39,7 @@ console.log('groped image', props.pet)
         data.append('left', coordinates.left || '')
         data.append('top', coordinates.top || '')
 
-        router.post(`/pet/${props.pet.id}/update-image`, data, {
+        router.post(`/user/update-image`, data, {
             preserveState: false,
         })
         emit('showModal', false)

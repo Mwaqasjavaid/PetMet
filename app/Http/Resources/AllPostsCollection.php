@@ -15,6 +15,7 @@ class AllPostsCollection extends ResourceCollection
     public function toArray($request)
     {
         return $this->collection->map(function($item) {
+            // dd($item);
             return [
                 'id' => $item->id,
                 'text' => $item->text,
@@ -31,10 +32,10 @@ class AllPostsCollection extends ResourceCollection
                         ],
                     ];
                 }),
-                'user' => [
-                    'id' => $item->user->id,
-                    'name' => $item->user->name,
-                    'image' => $item->user->image
+                'pet' => [
+                    'id' => $item->pet->id,
+                    'name' => $item->pet->name,
+                    'image' => $item->pet->image
                 ],
             ];
         });
