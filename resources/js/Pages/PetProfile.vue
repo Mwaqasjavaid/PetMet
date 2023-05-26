@@ -113,7 +113,7 @@ console.log('pet posts', posts)
                     <div class="font-extrabold pb-2 text-xl">Photos</div>
                     <div class="flex flex-wrap items-center justify-start w-full">
                         <span
-                            v-for="photo in posts.data"
+                            v-for="photo in posts"
                             :key="photo"
                             class="w-1/3"
                             v-show="photo.image !== null"
@@ -137,7 +137,7 @@ console.log('pet posts', posts)
                 />
 
                 <div v-for="post in posts" :key="post">
-                    <Post :user="pet" :post="post" :comments="post.comments" />
+                    <Post :pet="pet" :post="post" :comments="post.comments" />
                 </div>
 
             </div>

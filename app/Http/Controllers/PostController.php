@@ -8,7 +8,7 @@ use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Image;
-
+use Auth;
 
 class PostController extends Controller
 {
@@ -19,10 +19,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $user = auth()->user();
+        $posts = Post::orderBy('created_at', 'desc')->with('pet.user', 'comments.user')->get();
         // dd($posts);
         return Inertia::render('Posts', [
-            'posts' => new AllPostsCollection($posts)
+            'posts' => $posts,
+            'user' => $user
         ]);
     }
 

@@ -1,7 +1,7 @@
 <script setup>
 import { toRefs, reactive } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
 
+import { router, Link, usePage } from '@inertiajs/vue3';
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
 import ThumbUp from 'vue-material-design-icons/ThumbUp.vue'
 import Check from 'vue-material-design-icons/Check.vue'
@@ -15,13 +15,14 @@ const { isImageDisplay } = storeToRefs(useGeneral)
 const form = reactive({ comment: null })
 
 const props = defineProps({
-    user: Object,
+    pet: Object,
     post: Object,
     comments: Object,
 });
+const user = usePage().props.auth.user
 
-const { post, user, comments } = toRefs(props)
-
+const { post, pet, comments } = toRefs(props)
+console.log(pet)
 const createComment = () => {
     router.post('/comment', {
         post_id: post.value.id,
@@ -45,7 +46,9 @@ const deletePost = (id) => {
 }
 
 const isUser = () => {
-    router.get('/user/' + user.value.id)
+    console.log('fi',props.pet.id,user.id)
+    if(props.pet.user_id == user.id)
+    router.get('/pet/' + props.pet.id )
 }
 </script>
 
@@ -53,16 +56,16 @@ const isUser = () => {
     <div id="Post" class="w-full bg-white rounded-lg my-4 shadow-md">
         <div class="flex items-center py-3 px-3">
             <button @click="isUser" class="mr-2">
-                <img class="rounded-full ml-1 min-w-[42px] max-h-[42px]" :src="user.image">
+                <img class="rounded-full ml-1 min-w-[42px] max-h-[42px]" :src="pet.image">
             </button>
             <div class="flex items-center justify-between p-2 rounded-full w-full">
                 <div>
-                    <div class="font-extrabold text-[15px]">{{ user.name }}</div>
+                    <div class="font-extrabold text-[15px]">{{ pet.name }}</div>
                     <div class="flex items-center text-xs text-gray-600">
                         {{ post.created_at }} <AccountMultiple class="ml-1" :size="15" fillColor="#64676B"/>
                     </div>
                 </div>
-                <div class="flex items-center">
+                <div v-if="post.pet.user_id == $page.props.auth.user.id " class="flex items-center">
                     <button @click="deletePost(post.id)" class="rounded-full p-1.5 cursor-pointer hover:bg-[#F2F2F2]">
                         <Delete fillColor="#64676B"/>
                     </button>
