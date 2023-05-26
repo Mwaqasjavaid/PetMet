@@ -1,4 +1,5 @@
 <script setup>
+import {toRefs} from 'vue'
 import { Link, Head } from '@inertiajs/vue3';
 import MainNavLayout from '@/Layouts/MainNavLayout.vue';
 import CreatePostBox from '@/Components/CreatePostBox.vue';
@@ -12,8 +13,16 @@ import { storeToRefs } from 'pinia';
 const useGeneral = useGeneralStore()
 const { isCropperModal, isImageDisplay } = storeToRefs(useGeneral)
 
-defineProps({ pet: Object, posts: Object })
+// defineProps({ , posts: Object })
+const props = defineProps({
+    pet: Object,
+    user: Object,
+    posts: Object,
+});
 
+const { posts, user, } = toRefs(props);
+
+console.log('pet posts', posts)
 </script>
 
 <template>
@@ -127,8 +136,8 @@ defineProps({ pet: Object, posts: Object })
                     :placeholder="'What\'s on your mind ' + pet.name "
                 />
 
-                <div v-for="post in posts.data" :key="post">
-                    <Post :user="post.user" :post="post" :comments="post.comments" />
+                <div v-for="post in posts" :key="post">
+                    <Post :user="pet" :post="post" :comments="post.comments" />
                 </div>
 
             </div>

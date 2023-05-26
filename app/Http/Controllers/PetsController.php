@@ -28,7 +28,7 @@ class PetsController extends Controller
     {
         // $pets = Pet::orderBy('created_at', 'desc')->get();
         $pet = Pet::where('id', $id)->first();
-        $posts = Post::where('pet_id', $pet->id)->get();
+        $posts = Post::where('pet_id', $pet->id)->with('pet', 'comments.user')->get();
         return Inertia::render('PetProfile', [
             'pet' => $pet,
             'posts' => $posts

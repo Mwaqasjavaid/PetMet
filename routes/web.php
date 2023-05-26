@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 //    Route::get('/', [PostController::class, 'index'])->name('index');
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
-    Route::post('/post', [PostController::class, 'store'])->name('post.store');
+    Route::post('/post/{id}', [PostController::class, 'store'])->name('post.store');
     Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
 
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');

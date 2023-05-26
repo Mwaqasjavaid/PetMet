@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Image;
+
 
 class PostController extends Controller
 {
@@ -30,19 +32,41 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    // {
+    //     $request->validate([ 'text' => 'required' ]);
+    //     $post = new Post;
+
+    //     if ($request->hasFile('image')) {
+    //         $request->validate([ 'image' => 'required|mimes:jpg,jpeg,png' ]);
+    //         $post = (new ImageService)->updateImage($post, $request);
+    //     }
+
+    //     $post->user_id = auth()->user()->id;
+    //     $post->text = $request->input('text');
+    //     $post->save();
+    // }
+    public function store(Request $request, $id)
     {
-        $request->validate([ 'text' => 'required' ]);
-        $post = new Post;
+        $request->validate([
+            // 'pet_id' => 'required',
+            'text' => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png'
+        ]);
 
-        if ($request->hasFile('image')) {
-            $request->validate([ 'image' => 'required|mimes:jpg,jpeg,png' ]);
-            $post = (new ImageService)->updateImage($post, $request);
+        $image_path='';
+        if($request->image) {
+            $image_path = $this->imageSave($request);
         }
-
-        $post->user_id = auth()->user()->id;
+        
+        $post = new Post();
+        $post->pet_id = $id;
         $post->text = $request->input('text');
+        $post->image = $image_path;
+        // Handle image upload and save
+        
         $post->save();
+        
     }
 
     /**
@@ -63,5 +87,38 @@ class PostController extends Controller
             }
         }
         $post->delete();
+    }
+
+    public function imageSave($request)
+    {
+
+        $image = Image::make($request->file('image'));
+
+        // if (!empty($image)) {
+        //     $currentImage = public_path() . $image;
+
+        //     if (file_exists($currentImage) && $currentImage != public_path() . '/images/user-placeholder.png') {
+        //         unlink($currentImage);
+        //     }
+        // }
+
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+
+        // if ($request->width) {
+        //     $image->crop(
+        //         $request->width,
+        //         $request->height,
+        //         $request->left,
+        //         $request->top
+        //     );
+        // }
+
+        $name = time() . '.' . $extension;
+        $image->save(public_path() . '/images/' . $name);
+        // dd($model);
+        $image_path = '/images/' .$name;
+
+        return $image_path;
     }
 }

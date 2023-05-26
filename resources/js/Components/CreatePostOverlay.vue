@@ -34,7 +34,8 @@ const props = defineProps({
     const { pet } = toRefs(props)
 
 const createPost = () => {
-    router.post('/post', form, {
+    console.log(form.image);
+    router.post(`/post/${props.pet.id}`, form, {
         forceFormData: true,
         preserveScroll: true,
         onError: errors => {

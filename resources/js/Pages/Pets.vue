@@ -11,6 +11,7 @@ const props = defineProps({
 });
 
 const { pets, user } = toRefs(props);
+
 </script>
 
 <template>
@@ -112,7 +113,7 @@ const { pets, user } = toRefs(props);
                                             >
                                                 <a :href="`/pet/${pet.id}`">{{
                                                     pet.age
-                                                }}</a>
+                                                }}</a><span class="text-[11px]">years</span>
                                             </td>
                                         </tr>
                                     </tbody>

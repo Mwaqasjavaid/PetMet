@@ -14,7 +14,14 @@ class UserController extends Controller
 
     public function index()
     {
-        $posts = Post::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        // $posts = Post::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        // return Inertia::render('User', [
+        //     'posts' => new AllPostsCollection($posts)
+        // ]);
+        $posts = Post::whereHas('pet', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->orderBy('created_at', 'desc')->get();
+
         return Inertia::render('User', [
             'posts' => new AllPostsCollection($posts)
         ]);

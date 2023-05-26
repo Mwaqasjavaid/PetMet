@@ -1,7 +1,7 @@
 
 <template>
   <div class="max-w-[1100px] pt-[56px] mx-auto pb-1 mt-0">
-    <img class="rounded-b-xl ml-[469px]" src="/images/icons/Petmetlogo.jpg">
+    <img class="rounded-b-xl " src="/images/icons/Petmetlogo.jpg">
   </div>
 
   

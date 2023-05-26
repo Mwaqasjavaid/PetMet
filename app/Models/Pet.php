@@ -9,16 +9,17 @@ class Pet extends Model
 {
 
     use HasFactory;
-    public $table = "pets";
-    protected $fillable = [
-        'petname',
-        'category',
-        'age',
-        'image',
-    ];
+    // public $table = "pets";
+    // protected $fillable = [
+    //     'petname',
+    //     'category',
+    //     'age',
+    //     'image',
+    // ];
+    protected $fillable = ['pet_id', 'text', 'image'];
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Pet::class);
     }
 }
