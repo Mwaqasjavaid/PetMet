@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { post, Inertia } from "@inertiajs/inertia";
 import { Link, router, usePage } from "@inertiajs/vue3";
 import { toRefs, reactive } from "vue";
-
+import bgImage from "../../../public/images/icons/dogbg.jpg/"
 const props = defineProps({
     user: Object,
     pets: Object,
@@ -16,7 +16,7 @@ const { pets, user } = toRefs(props);
 
 <template>
     <UserNavLayout>
-        <div class="bg-blue-100 pb-[120px]">
+        <div  class="pb-[120px]">
             <div v-if="successMessage" class="success-message">
                 {{ successMessage }}
             </div>
@@ -28,7 +28,7 @@ const { pets, user } = toRefs(props);
 
             <div class="flex justify-center ">
                 <h1
-                    class="mb-2 text-[#] mt-[50px] text-5xl font-bold leading-tight"
+                    class="mb-2 text-[#303234] mt-[50px] text-5xl font-bold leading-tight"
                 >
                     User PetList
                 </h1>
@@ -37,11 +37,11 @@ const { pets, user } = toRefs(props);
             </div>
 
             <div class="flex justify-center ">
-                <h1
+                <!-- <h1
                     class="mb-2 text-[#] mt-[10px] text-1xl font-bold leading-tight text-blue-500"
                 >
                     Click on PET to login
-                </h1>
+                </h1> -->
 
                 
             </div>
@@ -59,62 +59,62 @@ const { pets, user } = toRefs(props);
                                         class="border-b flex justify-between font-medium"
                                     >
                         
-                                        <tr>
+                                        <!-- <tr>
                                             <th
                                                 scope="col"
                                                 class="rounded-xl px-10 text-[#303234] py-4 text-4xl"
                                             >
                                                 PET
                                             </th>
-                                        </tr>
-                                        <tr>
+                                        </tr> -->
+                                        <!-- <tr>
                                             <th
                                                 scope="col"
                                                 class="rounded-xl px-10 text-[#303234] py-4 text-4xl"
                                             >
                                                 CATEGORY
                                             </th>
-                                        </tr>
-                                        <tr>
+                                        </tr> -->
+                                        <!-- <tr>
                                             <th
                                                 scope="col"
                                                 class="rounded-xl px-16 text-[#303234] py-4 text-4xl"
                                             >
                                                 AGE
                                             </th>
-                                        </tr>
+                                        </tr> -->
                                     </thead>
                                     <tbody>
                                         <tr
                                             v-for="pet in pets"
                                             :key="pet.id"
-                                            class="border-b flex justify-between dark:border-neutral-500"
+                                            class=" flex justify-between dark:border-neutral-500"
                                         >
                                             <td
-                                                class="px-6 ml-0 py-4 hover:text-blue-600 hover:underline font-bold text-2xl uppercase ">
-                                             <div class="flex flex-row">
-                                                <div><img class="rounded-full ml-1 min-w-[35px] max-h-[35px] cursor-pointer" :src="pet.image"></div>
-                                                <div> <a :href="`/pet/${pet.id}`"> {{ pet.name }} </a></div>
+                                                class="px-6 ml-0  py-4 hover:text-blue-600  font-bold text-2xl uppercase ">
+                                             <div class="flex  flex-row">
+                                                <div><img class="rounded-full hover:opacity-50  ml-1 min-w-[65px] max-h-[65px]  cursor-pointer" :src="pet.image"></div>
+                                                <div class="ml-4 mt-[15px] hover:opacity-50  text-[#303234]"> <a  :href="`/pet/${pet.id}`"> {{ pet.name }} </a></div>
                                              </div>
                                                    
                                                 
                     
                        
                                             </td>
-                                            <td
+                                            <!-- <td
                                                 class="px-6 py-4 font-bold text-2xl uppercase text-center"
                                             >
                                                 <a :href="`/pet/${pet.id}`">{{
                                                     pet.category
                                                 }}</a>
-                                            </td>
-                                            <td
+                                            </td> -->
+                                            <!-- <td
                                                 class="px-6 py-4 mr-14 font-bold text-2xl uppercase"
                                             >
                                                 <a :href="`/pet/${pet.id}`">{{
                                                     pet.age
                                                 }}</a><span class="text-[11px]">years</span>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </table>

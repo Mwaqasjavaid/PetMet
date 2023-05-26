@@ -34,8 +34,8 @@ console.log('pet posts', posts)
 
     <UserNavLayout>
     </UserNavLayout>
-    <div class="fixed w-full h-[100%] bg-[#F1F2F5]" style="z-index:-1;">
-        <div class="grid grid-rows-3 grid-flow-col w-full max-w-[1600px] mt-[56px] h-[calc(100%-56px)] mx-auto px-4 pr-[24rem]">
+    <div class="fixed   w-full h-[100%] bg-[#F1F2F5]" style="z-index:-1;">
+        <div class="grid  grid-rows-3 grid-flow-col w-full max-w-[1600px]  h-[calc(100%-56px)] mx-auto px-4 pr-[24rem]">
             <div id="LeftSection" class="xl:w-[345px] lg:block hidden">
                 <div class="pt-4 max-w-[320px] pr-4">
                     <Link :href="route('user.show', { id: user.id })" class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] p-2 rounded-md">
