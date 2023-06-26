@@ -2,6 +2,7 @@
 use App\Http\Controllers\PetsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\likeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,10 @@ Route::get('/addpets', function () {
 Route::get('/petprofile', function () {
     return Inertia::render('PetProfile');
 })->name('petprofile')->middleware('auth');
+Route::put('/posts/{id}/like', [LikeController::class, 'like'])->middleware('auth')->name('posts.like');
+
+Route::put('/posts/{post}/unlike', [LikeController::class, 'unlike'])->middleware('auth')->name('posts.unlike');
+
 
 // Route::get('/', [PetsController::class, 'index'])->name('pets.index');
 
@@ -26,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [PetsController::class, 'index'])->name('pets.index');  
     Route::get('/changepet', [PetsController::class, 'changepet']);
     Route::post('/pet/{id}/update-image', [PetsController::class, 'updateImage'])->name('pet.updateImage');
+
+    Route::get('/pets/search', [PetsController::class, 'search'])->name('pets.search');
     
 //    Route::get('/', [PostController::class, 'index'])->name('index');
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -42,6 +49,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //vedio routes
+    Route::post('/post/{id}/video', [PostController::class, 'storeVideo'])->name('post.storeVideo');
+    Route::delete('/post/{id}/video', [PostController::class, 'destroyVideo'])->name('post.destroyVideo');
+    
+
 });
 
 require __DIR__.'/auth.php';

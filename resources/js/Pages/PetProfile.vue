@@ -72,9 +72,9 @@ console.log('pet posts', posts)
                             cursor-pointer
                         "
                     >
-                        <button class="flex items-center px-5 py-2 font-bold">
+                        <!-- <button class="flex items-center px-5 py-2 font-bold">
                             <Pen class="-ml-2 mr-1" :size="22"/> Edit profile
-                        </button>
+                        </button> -->
                     </Link>
                 </div>
 
@@ -126,6 +126,13 @@ console.log('pet posts', posts)
                         </span>
                     </div>
                 </div>
+
+                <div class="font-extrabold pb-2 text-[30px] bg-white p-3 mt-4 rounded-lg shadow-lg "> INFO
+            
+                 <h1 class="text-black-600"> AGE:  <span class="text-blue-600"> {{ pet.age }} Year </span></h1>
+                  <h1 class="text-black-600" >CATEGORY: <span class="text-blue-600"> {{ pet.category }}</span></h1>
+
+                  </div>
             </div>
 
             <div id="PostsSection" class="w-full md:w-7/12  overflow-auto">
@@ -133,11 +140,11 @@ console.log('pet posts', posts)
                 <CreatePostBox
                     :pet="pet"
                     :image="pet.image"
-                    :placeholder="'What\'s on your mind ' + pet.name "
+                    :placeholder="'What\'s on your mind '"
                 />
 
                 <div v-for="post in posts" :key="post">
-                    <Post :pet="pet" :post="post" :comments="post.comments" />
+                    <Post :pet="pet" :post="post" :comments="post.comments" :likes="post.likes" />
                 </div>
 
             </div>

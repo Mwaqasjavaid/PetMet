@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\AllPostsCollection;
 use App\Models\Post;
 use App\Services\ImageService;
@@ -17,10 +18,20 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function uploadVideo(Request $request)
+    {
+        $request->validate([
+            'video' => 'required|mimetypes:video/mp4,video/quicktime,video/x-msvideo|max:2048',
+        ]);
+
+        $videoPath = $request->file('video')->store('videos', 'public');
+
+        return $videoPath;
+    }
     public function index()
     {
         $user = auth()->user();
-        $posts = Post::orderBy('created_at', 'desc')->with('pet.user', 'comments.user')->get();
+        $posts = Post::orderBy('created_at', 'desc')->with('pet.user', 'comments.user','likes.user')->get();
         // dd($posts);
         return Inertia::render('Posts', [
             'posts' => $posts,
@@ -34,41 +45,55 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([ 'text' => 'required' ]);
-    //     $post = new Post;
-
-    //     if ($request->hasFile('image')) {
-    //         $request->validate([ 'image' => 'required|mimes:jpg,jpeg,png' ]);
-    //         $post = (new ImageService)->updateImage($post, $request);
-    //     }
-
-    //     $post->user_id = auth()->user()->id;
-    //     $post->text = $request->input('text');
-    //     $post->save();
-    // }
+   
     public function store(Request $request, $id)
     {
         $request->validate([
-            // 'pet_id' => 'required',
             'text' => 'required',
-            'image' => 'required|mimes:jpg,jpeg,png'
+            // 'image' => 'nullable|mimes:jpg,jpeg,png,gif|required_without:video',
+            // 'video' => 'nullable|mimetypes:video/mp4,video/quicktime,video/x-msvideo|max:2048',
         ]);
-
-        $image_path='';
-        if($request->image) {
-            $image_path = $this->imageSave($request);
-        }
         
+        // dd($request);
+        
+        
+
+        $image_path = '';
+        $video_path = '';
+
         $post = new Post();
         $post->pet_id = $id;
         $post->text = $request->input('text');
-        $post->image = $image_path;
-        // Handle image upload and save
-        
+        if ($request->image != "null") {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            switch($extension) {
+                case 'jpg':
+                case 'png':
+                case 'gif':
+                case 'jpeg':
+                case 'gif':
+                case 'tiff':
+                    $image_path = $this->imageSave($request);
+                    $post->image = $image_path;
+                    break;
+                case 'mp4':
+                case 'webm':
+                case 'ogg':
+                    $video_path = $this->videoSave($request->file('image'));
+                    $post->video = $video_path;
+                    break;
+                default: 
+                    return "invalid file type";
+            }
+        }
+
+        // if ($request->video != 'null') {
+        //     $video_path = $this->videoSave($request);
+        // }
         $post->save();
         
+
     }
 
     /**
@@ -88,7 +113,16 @@ class PostController extends Controller
                 unlink($currentImage);
             }
         }
+        if (!empty($post->video)) {
+            if (file_exists(public_path($post->video))){
+                unlink(public_path($post->video));
+            }
+            // else {
+            //     dd('File does not exists.');
+            // }
+        }
         $post->delete();
+
     }
 
     public function imageSave($request)
@@ -96,31 +130,30 @@ class PostController extends Controller
 
         $image = Image::make($request->file('image'));
 
-        // if (!empty($image)) {
-        //     $currentImage = public_path() . $image;
 
-        //     if (file_exists($currentImage) && $currentImage != public_path() . '/images/user-placeholder.png') {
-        //         unlink($currentImage);
-        //     }
-        // }
 
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
 
-        // if ($request->width) {
-        //     $image->crop(
-        //         $request->width,
-        //         $request->height,
-        //         $request->left,
-        //         $request->top
-        //     );
-        // }
 
         $name = time() . '.' . $extension;
         $image->save(public_path() . '/images/' . $name);
         // dd($model);
-        $image_path = '/images/' .$name;
+        $image_path = '/images/' . $name;
 
         return $image_path;
+    }
+
+    public function videoSave($file)
+    {
+        // $file = $request->file('video');
+        // dd('file', public_path('videos'));
+        $extension = $file->getClientOriginalExtension();
+        $name = time() . '.' . $extension;
+        $file->move(public_path('videos'), $name);
+
+        $video_path = '/videos/' . $name;
+
+        return $video_path;
     }
 }

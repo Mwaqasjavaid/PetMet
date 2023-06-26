@@ -4,16 +4,9 @@ import MainNavLayout from '@/Layouts/MainNavLayout.vue';
 import CreatePostBox from '@/Components/CreatePostBox.vue';
 import Post from '@/Components/Post.vue';
 
-import Magnify from 'vue-material-design-icons/Magnify.vue'
-import TelevisionPlay from 'vue-material-design-icons/TelevisionPlay.vue'
-import StorefrontOutline from 'vue-material-design-icons/StorefrontOutline.vue'
-import AccountGroup from 'vue-material-design-icons/AccountGroup.vue'
+
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
-import Flag from 'vue-material-design-icons/Flag.vue'
-import ClockTimeTwoOutline from 'vue-material-design-icons/ClockTimeTwoOutline.vue'
-import Restore from 'vue-material-design-icons/Restore.vue'
-import VideoImage from 'vue-material-design-icons/VideoImage.vue'
-import DotsHorizontal from 'vue-material-design-icons/DotsHorizontal.vue'
+
 
 defineProps({ posts: Object })
 
@@ -37,30 +30,7 @@ const user = usePage().props.auth.user
                             <AccountMultiple :size="40" fillColor="#5BD7C6"/>
                             <div class="text-[15px] text-gray-800 font-extrabold pl-3">Friends</div>
                         </button>
-                        <!-- <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                            <Flag :size="40" fillColor="#F2682C"/>
-                            <div class="text-[15px] text-gray-800 font-extrabold pl-3">Pages</div>
-                        </button>
-                        <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                            <ClockTimeTwoOutline :size="40" fillColor="#21AAFA"/>
-                            <div class="text-[15px] text-gray-800 font-extrabold pl-3">Most Recent</div>
-                        </button>
-                        <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                            <AccountGroup :size="40" fillColor="#20A9FD"/>
-                            <div class="text-[15px] text-gray-800 font-extrabold pl-3">Groups</div>
-                        </button>
-                        <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                            <StorefrontOutline :size="40" fillColor="#48C0D8"/>
-                            <div class="text-[15px] text-gray-800 font-extrabold pl-3">Marketplace</div>
-                        </button>
-                        <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                            <TelevisionPlay :size="40" fillColor="#9739CF"/>
-                            <div class="text-[15px] text-gray-800 font-extrabold pl-3">Watch</div>
-                        </button>
-                        <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                            <Restore :size="40" fillColor="#32B4D0"/>
-                            <div class="text-[15px] text-gray-800 font-extrabold pl-3">Memories</div>
-                        </button> -->
+                     
                     </div>
                 </div>
 
@@ -72,7 +42,7 @@ const user = usePage().props.auth.user
                     />
 
                     <div v-for="post in posts.data" :key="post">
-                        <Post :user="post.user" :post="post" :comments="post.comments" />
+                        <Post :user="post.user" :post="post" :comments="post.comments" :likes="post.likes" />
                     </div>
 
                 </div>

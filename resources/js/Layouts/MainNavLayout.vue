@@ -46,7 +46,7 @@
             <Link :href="route('posts.index')" class="pl-3 min-w-[55px]">
                 <img class="w-[55px]" src="/images/icons/petmetlogo.jpg">
             </Link>
-            <div class="flex items-center justify-center bg-[#EFF2F5] p-1 rounded-full h-[40px] ml-2">
+            <!-- <div class="flex items-center justify-center bg-[#EFF2F5] p-1 rounded-full h-[40px] ml-2">
                 <Magnify class="p-1" :size="22" fillColor="#64676B"/>
                 <input
                     class="
@@ -62,7 +62,7 @@
                     placeholder="Search here"
                     type="text"
                 >
-            </div>
+            </div> -->
         </div>
 
         <div id="NavCenter" class="hidden lg:flex items-center ml-5 justify-center w-8/12 max-w-[600px]">
@@ -85,9 +85,9 @@
         </div>
         <div class="flex items-center justify-end w-2/12 mr-4">
             
-            <button class="rounded-full bg-[#E3E6EA] p-2 hover:bg-gray-300 mx-1 cursor-pointer">
+            <!-- <button class="rounded-full bg-[#E3E6EA] p-2 hover:bg-gray-300 mx-1 cursor-pointer">
                 <Bell :size="23" fillColor="#050505"/>
-            </button>
+            </button> -->
             <div class="flex items-center justify-center relative">
                 <button @click="showMenu = !showMenu">
                     <img v-if="pet.image" class="rounded-full ml-1 min-w-[40px] max-h-[40px] cursor-pointer" :src="pet.image">

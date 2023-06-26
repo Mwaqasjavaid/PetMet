@@ -5,16 +5,8 @@ import UserNavLayout from '@/Layouts/UserNavLayout.vue';
 import CreatePostBox from '@/Components/CreatePostBox.vue';
 import Post from '@/Components/Post.vue';
 
-import Magnify from 'vue-material-design-icons/Magnify.vue'
-import TelevisionPlay from 'vue-material-design-icons/TelevisionPlay.vue'
-import StorefrontOutline from 'vue-material-design-icons/StorefrontOutline.vue'
-import AccountGroup from 'vue-material-design-icons/AccountGroup.vue'
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
-import Flag from 'vue-material-design-icons/Flag.vue'
-import ClockTimeTwoOutline from 'vue-material-design-icons/ClockTimeTwoOutline.vue'
-import Restore from 'vue-material-design-icons/Restore.vue'
-import VideoImage from 'vue-material-design-icons/VideoImage.vue'
-import DotsHorizontal from 'vue-material-design-icons/DotsHorizontal.vue'
+
 
 // defineProps({ posts: Object })
 
@@ -51,13 +43,10 @@ console.log('pet posts', posts)
             </div>
 
             <div id="PostsSection" class="row-span-6 max-w-[600px] lg:mx-0 mx-auto overflow-auto ">
-                <!-- <CreatePostBox
-                    :image="user.image"
-                    :placeholder="'Click here to post ' + user.name "
-                /> -->
+        
 
                 <div v-for="post in posts" :key="post">
-                    <Post :pet="post.pet" :post="post" :comments="post.comments" />
+                    <Post :pet="post.pet" :post="post" :comments="post.comments" :likes="post.likes" />
                 </div>
 
             </div>

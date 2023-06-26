@@ -43,13 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function posts()
-    // {
-    //     return $this->hasMany(Post::class);
-    // }
+   
 
     public function pet()
     {
         return $this->has(Pet::class, 'pet_id');
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }

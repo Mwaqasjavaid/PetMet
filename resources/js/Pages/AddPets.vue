@@ -16,7 +16,7 @@
             Pet Name
           </label>
           <input class="appearance-none block w-full  text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="pet-name" v-model="formData.name" type="text" placeholder="Tom">
-          
+          <!-- <p v-if="props.errors">{{props.errors.name}}</p> -->
            </div>
       </div>
       <div class="">
@@ -51,8 +51,15 @@ import { Link, router, usePage} from '@inertiajs/vue3';
 // import UserNavLayout from "@/Layouts/UserNavLayout.vue";
 
 
+
 export default {
     setup() {
+      //   const props = defineProps({
+      //     // pet: Object,
+      //     errors: Object,
+      // });
+
+      // const { errors, } = usePage().props?.errors
         const formData = ref({
             name: "",
             category: "",
@@ -105,6 +112,7 @@ export default {
             submitForm,
             showForm,
             successMessage,
+            // errors
         };
     },
     components: { UserNavLayout }

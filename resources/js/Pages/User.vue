@@ -136,5 +136,6 @@ defineProps({ posts: Object, user: Object })
 
             </div>
         </div>
+        
     </UserNavLayout>
 </template>
