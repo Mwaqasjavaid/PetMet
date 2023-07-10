@@ -37,6 +37,7 @@ const user = usePage().props.auth.user
                 <div id="PostsSection" class="row-span-6 max-w-[600px] lg:mx-0 mx-auto overflow-auto ">
 
                     <CreatePostBox
+                        v-show="user.id == posts[0].user_id"
                         :image="user.image"
                         :placeholder="'Click here to post ' + user.name "
                     />

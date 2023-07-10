@@ -1,6 +1,6 @@
 <script setup>
 import {toRefs} from 'vue'
-import { Link, Head } from '@inertiajs/vue3';
+import { Link, Head, usePage } from '@inertiajs/vue3';
 import MainNavLayout from '@/Layouts/MainNavLayout.vue';
 import CreatePostBox from '@/Components/CreatePostBox.vue';
 import Post from '@/Components/Post.vue';
@@ -20,9 +20,10 @@ const props = defineProps({
     posts: Object,
 });
 
-const { posts, user, } = toRefs(props);
+const { posts } = toRefs(props);
+const user = usePage().props.auth.user
 
-console.log('pet posts', posts)
+console.log('pet posts', user)
 </script>
 
 <template>
@@ -138,6 +139,7 @@ console.log('pet posts', posts)
             <div id="PostsSection" class="w-full md:w-7/12  overflow-auto">
 
                 <CreatePostBox
+                    v-show="user.id == pet.user_id"
                     :pet="pet"
                     :image="pet.image"
                     :placeholder="'What\'s on your mind '"

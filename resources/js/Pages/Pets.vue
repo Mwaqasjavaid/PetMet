@@ -16,7 +16,7 @@ const { pets, user } = toRefs(props);
 
 <template>
     <UserNavLayout>
-        <div  class="pb-[120px]">
+        <div  class="pb-[120px] pt-8 ">
             <div v-if="successMessage" class="success-message">
                 {{ successMessage }}
             </div>

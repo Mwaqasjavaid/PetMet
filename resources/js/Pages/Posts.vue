@@ -34,11 +34,7 @@ console.log('pet posts', posts)
                         <img class="rounded-full ml-1 min-w-[38px] max-h-[38px]" :src="user.image">
                         <div class="text-[15px] text-gray-800 font-extrabold pl-3">{{ user.name }}</div>
                     </Link>
-                    <button class="flex items-center justify-start w-full cursor-pointer hover:bg-[#E5E6E9] px-2 py-1.5 rounded-md">
-                        <AccountMultiple :size="40" fillColor="#5BD7C6"/>
-                        <div class="text-[15px] text-gray-800 font-extrabold pl-3">Friends</div>
-                    </button>
-                   
+                    
                 </div>
             </div>
 

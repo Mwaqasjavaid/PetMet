@@ -26,8 +26,7 @@ class PetsController extends Controller
 
 
 //   return Inertia::render('Pets/Search',
-  return 
-        [
+  return response()->json([
             'pets' => Pet::query()
                 ->when($request->search, function ($query, $search) {
                     $query->where('name','like','%'.$search.'%');
@@ -35,7 +34,7 @@ class PetsController extends Controller
                 })
                 ->get(),            
             // 'filters' => Request::only(['search'])
-        ];
+        ]);
 
 
 }
